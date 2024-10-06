@@ -1,3 +1,7 @@
+## About
+
+This is ERC20 token project using openZeppelin.  
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
