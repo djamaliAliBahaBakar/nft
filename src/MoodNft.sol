@@ -22,13 +22,13 @@ contract  MoodNft is ERC721 {
     constructor(string memory sadSvgImageUri, string memory happySvgImageUri) ERC721("Mood NFT", "MN") {
         s_tokenCounter =0;
         s_sadSvgImageUrI = sadSvgImageUri;
-        s_sadSvgImageUrI = happySvgImageUri;
+        s_happySvgImageUri = happySvgImageUri;
     }
 
 
     function mintNft() public {
         _safeMint(msg.sender, s_tokenCounter);
-         s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY;
+        s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY;
         s_tokenCounter++;
     }
 
@@ -36,7 +36,7 @@ contract  MoodNft is ERC721 {
         return "data:application/json;base64,";
     }
 
-    function flipMood(uint256 tokenId) public {
+    function flipMood(uint256 tokenId) public view {
         if(!_isAuthorized(msg.sender, msg.sender, tokenId)){
             revert MoodNFT__CantFlipMoodIfNotOwner();
         }
@@ -62,9 +62,9 @@ contract  MoodNft is ERC721 {
                 Base64.encode(
                 bytes(
                     abi.encodePacked(
-                    '{"name: "',
+                    '{"name": "',
                     name(),
-                    '", description: "An NFT that reflects your mood!", "attributes": [{"trait_type": "Mood", "value": 100}], "image": ',
+                    '", "description": "An NFT that reflects your mood!", "attributes": [{"trait_type": "Mood", "value": 100}], "image": "',
                     imageURI,
                     '"}'
                     )
